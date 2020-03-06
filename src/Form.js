@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 
 const Form = ({ saveIdea }) => {
-  const [input, setInput] = useState({title: '', description: ''})
+  const [input, setInput] = useState({id: Date.now(), title: '', description: ''})
 
   const handleChange = e => {
     const {name, value} = e.target
@@ -11,7 +11,7 @@ const Form = ({ saveIdea }) => {
   const submitIdea = e => {
     e.preventDefault();
     saveIdea(input)
-    setInput({title: '', description: ''});
+    setInput({id: Date.now(), title: '', description: ''});
   }
 
   return (
