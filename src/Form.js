@@ -1,12 +1,24 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
-const Form = () => {
-  const [idea, setIdea] = useState('')
+const Form = ({ saveIdea }) => {
+  const [input, setInput] = useState({title: '', description: ''})
+
+  const handleChange = e => {
+    const {name, value} = e.target
+    setInput({...input, [name]: value})
+  }
+
+  const submitIdea = e => {
+    e.preventDefault();
+    saveIdea(input)
+    setInput({title: '', description: ''});
+  }
 
   return (
     <form>
-      <input placeholder='Idea..'/>
-      <button type='submit'>Submit Idea</button>
+      <input name='title' onChange={handleChange} value={input.title} placeholder='Title..'/>
+      <input name='description' onChange={handleChange} value={input.description} placeholder='Description..'/>
+      <button type='submit' onClick={submitIdea}>Submit Idea</button>
     </form>
   )
 }
